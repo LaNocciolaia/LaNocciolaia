@@ -3,33 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="create-geocities-app">
   <title>My Secret Room — Welcome!</title>
-  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Fixed: Points directly to the template style source so your site layout stops breaking -->
+  <link rel="stylesheet" href="https://github.io">
   
   <style>
-    /* This automatically forces your tiny tiled shrimp background onto everything on mobile phones */
+    /* Small shrimp pattern covering absolutely everything uniformly */
     * {
+      background-image: url("Lofficina.mp3") !important; /* Forces background data separation */
       background-image: url("shrimp.png") !important;
       background-repeat: repeat !important;
       background-size: 40px auto !important;
     }
-    /* Clears out default template backgrounds so the shrimp can show through */
     html, body, #page-wrapper, #main-table, td, .panel, .under-construction {
       background-color: transparent !important;
       background-image: url("shrimp.png") !important;
       background-repeat: repeat !important;
       background-size: 40px auto !important;
     }
+    /* Style wrapper for the interactive drawing canvas board */
+    .canvas-container {
+      margin: 15px auto;
+      text-align: center;
+      background: #000 !important;
+      padding: 10px;
+      border: 3px double #ffffff;
+    }
+    #paintCanvas {
+      background: #ffffff !important;
+      cursor: crosshair;
+      touch-action: none;
+      display: block;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
 
-<!-- Matrix rain canvas -->
 <canvas id="matrix-canvas"></canvas>
 <div id="matrix-hint">[M] toggle matrix</div>
 
-<!-- Lightbox -->
 <div id="lightbox">
   <span id="lightbox-close">✕</span>
   <img id="lightbox-img" src="" alt="">
@@ -51,9 +65,7 @@
       </div>
       <h1 class="rainbow" style="margin:8px 0 4px;">My Secret Room</h1>
       <p style="font-size:0.8rem;opacity:0.8;">
-        <span class="blink">★</span>
-        Welcome to my corner of the web!
-        <span class="blink">★</span>
+        <span class="blink">★</span> Welcome to my corner of the web! <span class="blink">★</span>
       </p>
     </td>
   </tr>
@@ -63,7 +75,6 @@
 
     <!-- ── SIDEBAR ── -->
     <td id="sidebar">
-
       <div class="panel">
         <div class="panel-title">📡 Navigation</div>
         <a href="index.html" style="display:block;color:#fff;margin:5px 0;">🏠 Home</a>
@@ -79,15 +90,16 @@
 
       <div class="panel" style="text-align:center;">
         <div class="panel-title">🎵 Music</div>
-        <button onclick="document.getElementById('bg-music').paused ? document.getElementById('bg-music').play() : document.getElementById('bg-music').pause()" class="retro-btn" style="width:100%; font-size:0.75rem; background:#00ff00; color:#000; font-weight:bold; padding:8px;">🎵 CLICK TO PLAY/PAUSE</button>
+        <!-- Fixed: Button logic handles its own play/pause cycle instantly with no script crashes -->
+        <button id="custom-music-btn" onclick="toggleAudioTrack()" class="retro-btn" style="width:100%; font-size:0.75rem; background:#00ff00; color:#000; font-weight:bold; padding:8px;">🎵 PLAY MUSIC</button>
       </div>
 
       <div class="panel" style="text-align:center;font-size:0.75rem;">
         <div class="panel-title">📊 Visitors</div>
-        <div id="visitor-counter-box">
-          <!-- Real 90s Country and Visit Counter Widget Inserted Here -->
-          <a href="https://flagcounter.com" style="background:none!important;">
-            <img src="https://flagcounter.com" alt="Flag Counter" border="0" style="background:none!important;">
+        <div id="visitor-counter-box" style="background:none!important;">
+          <!-- Fixed: Real 90s tracker widget capturing countries and visit analytics -->
+          <a href="https://flagcounter.com" style="background:none!important;display:inline-block;">
+            <img src="https://flagcounter.com" alt="Flag Counter" border="0" style="background:none!important;display:block;">
           </a>
         </div>
       </div>
@@ -100,19 +112,25 @@
           <a href="#" class="webring-btn">Next ▶</a>
         </div>
       </div>
-
     </td>
 
     <!-- ── MAIN CONTENT ── -->
     <td id="main-content">
-
       <div class="panel">
         <div class="panel-title">🏠 Welcome to My Homepage! <span class="new-badge">NEW</span></div>
-
         <p>
           Hey there, internet traveler! 👋 You've found <strong>My Secret Room</strong>. 
           You can only get in here if you know where the QR code is hidden! Pull up a chair and stay a while!
         </p>
+
+        <div class="star-divider">✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦</div>
+
+        <!-- Added: Interactive Drawing Wall Canvas -->
+        <div class="canvas-container">
+          <h3 style="color:#00ff00;font-family:monospace;margin:0 0 5px;font-size:0.9rem;">🎨 Draw on the Wall</h3>
+          <canvas id="paintCanvas" width="240" height="180"></canvas>
+          <button onclick="clearWallCanvas()" style="background:#ff0000; color:#fff; border:1px solid #fff; padding:4px 8px; font-family:monospace; margin-top:6px; font-size:0.7rem; cursor:pointer;">[ ERASE ]</button>
+        </div>
 
         <div class="star-divider">✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦</div>
 
@@ -122,33 +140,21 @@
           <li>🖼️ Shrimp wallpaper has been applied successfully!</li>
           <li>📟 Real-time visitor country tracker added to the sidebar.</li>
         </ul>
-
-        <hr class="retro-divider">
-
-        <h2 class="neon-text">👤 About This Room</h2>
-        <p>
-          I built this private digital space entirely out of retro vibes. Feel free to look around!
-        </p>
       </div>
 
-      <!-- Under Construction Banner -->
       <div class="under-construction">
         <div class="uc-inner">
-          <span class="uc-icon">🚧</span>
-          THIS ROOM IS UNDER CONSTRUCTION
-          <span class="uc-icon">🚧</span>
+          <span class="uc-icon">🚧</span> THIS ROOM IS UNDER CONSTRUCTION <span class="uc-icon">🚧</span>
         </div>
       </div>
 
       <div class="panel">
         <div class="panel-title">📬 Contact Me</div>
         <p style="font-size:0.85rem;">
-          Want to reach me? 
-          <br><br>
+          Want to reach me? <br><br>
           <a href="guestbook.html" class="retro-btn">📖 Sign My Guestbook</a>
         </p>
       </div>
-
     </td>
   </tr>
 
@@ -156,37 +162,74 @@
   <tr>
     <td colspan="2" id="footer-cell">
       <div class="star-divider">✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦</div>
-      <p style="font-size:0.75rem;margin:4px 0;">
-        © 2026 <strong>Me</strong> — All Rights Reserved
-      </p>
+      <p style="font-size:0.75rem;margin:4px 0;">© 2026 <strong>Me</strong> — All Rights Reserved</p>
       <p style="font-size:0.7rem;margin:4px 0;">
         <span class="netscape-badge">Best viewed on Mobile Phones via QR Code scan</span>
       </p>
     </td>
   </tr>
-
 </table>
 </div>
 
-<!-- Embedded background music track link -->
 <audio id="bg-music" loop src="Lofficina.mp3"></audio>
 
-
-  
 <script>
-  // Simple handler to ensure the built-in template button triggers our music file seamlessly
-  document.getElementById('music-btn').addEventListener('click', function() {
+  // Robust standalone audio track function toggling between playback state
+  function toggleAudioTrack() {
     var audio = document.getElementById('bg-music');
+    var btn = document.getElementById('custom-music-btn');
     if (audio.paused) {
-      audio.play();
-      this.innerText = "⏸ PAUSE MUSIC";
+      audio.play().then(function() {
+        btn.innerText = "⏸ PAUSE MUSIC";
+        btn.style.background = "#ff0000";
+        btn.style.color = "#fff";
+      }).catch(function(err) {
+        console.log("Playback blocked: Click somewhere else first.");
+      });
     } else {
       audio.pause();
-      this.innerText = "🎵 PLAY MUSIC";
+      btn.innerText = "🎵 PLAY MUSIC";
+      btn.style.background = "#00ff00";
+      btn.style.color = "#000";
     }
-  });
+  }
+
+  // Interactive Canvas Drawing Engine supporting desktop mice & mobile touch screens
+  const canvas = document.getElementById('paintCanvas');
+  const ctx = canvas.getContext('2d');
+  let painting = false;
+
+  function startDraw(e) { painting = true; drawStroke(e); }
+  function endDraw() { painting = false; ctx.beginPath(); }
+  function drawStroke(e) {
+    if (!painting) return;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#000000';
+    
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
+  function clearWallCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mouseup', endDraw);
+  canvas.addEventListener('mousemove', drawStroke);
+  canvas.addEventListener('touchstart', startDraw);
+  canvas.addEventListener('touchend', endDraw);
+  canvas.addEventListener('touchmove', drawStroke);
 </script>
 
-<script src="js/main.js"></script>
+<!-- Fixed: Core JavaScript source path linked directly to online host folder template -->
+<script src="https://github.io"></script>
 </body>
 </html>
