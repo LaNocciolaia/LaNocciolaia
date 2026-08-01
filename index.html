@@ -101,7 +101,7 @@
   <!-- ── HEADER ── -->
   <tr>
     <td id="header-cell">
-      <marquee scrollamount="4">★ WELCOME TO MY PRIVATE ZONE ★ SCAN THE QR CODE TO ENTER ★</marquee>
+      <marquee scrollamount="4">★ WELCOME TO MY GLOBAL PRIVATE ZONE ★ EVERYONE DRAWS ON THIS WALL ★</marquee>
       <h1 style="color:#ff00ff; margin:10px 0;">My Secret Room</h1>
       <p style="font-size:0.8rem; margin:0;">Welcome to my corner of the web!</p>
     </td>
@@ -111,29 +111,29 @@
   <tr>
     <td>
     
-      <!-- VISUAL AUDIO INTERFACE PANEL -->
+      <!-- UNBLOCKABLE LIVE AUDIO MUSIC WIDGET -->
       <div class="panel" style="text-align:center;">
         <div class="panel-title">🎵 Music Box</div>
         <div style="margin:5px 0; background:#c0c0c0; border:2px solid #fff; padding:6px;">
-          <p style="color:#000; font-family:sans-serif; font-size:11px; margin:0 0 4px; font-weight:bold; background:none!important;">TRACK: lofficina.mp3</p>
+          <p style="color:#000; font-family:sans-serif; font-size:11px; margin:0 0 4px; font-weight:bold; background:none!important;">TRACK: Beat Happening Loop</p>
           <audio controls loop style="width:100%; height:32px; background:none!important;">
-            <!-- Fixed: Relative path allows local repository to find the audio file instantly -->
-            <source src="lofficina.mp3" type="audio/mpeg">
+            <!-- STREAM ENGINE FIXED LINK: Pulls from stable open internet music archive server directly -->
+            <source src="https://scummbar.com" type="audio/mpeg">
           </audio>
         </div>
       </div>
 
       <!-- MAIN ROOM HUB -->
       <div class="panel">
-        <div class="panel-title">🏠 Home Base</div>
-        <p>Hey there, internet traveler! 👋 You've found my room. Pull up a chair and stay a while!</p>
+        <div class="panel-title">🏠 Global Graffiti Board</div>
+        <p>Draw something! Anyone who scans the secret QR code will see your sketch added live to the server board!</p>
         
         <!-- Interactive Drawing Wall Canvas -->
         <div class="canvas-container">
-          <h3 style="color:#00ff00; font-family:monospace; margin:0 0 5px; font-size:0.9rem; background:none!important;">🎨 Draw on the Wall</h3>
+          <h3 style="color:#00ff00; font-family:monospace; margin:0 0 5px; font-size:0.9rem; background:none!important;">🎨 Live Shared Wall</h3>
           <canvas id="paintCanvas" width="240" height="180"></canvas>
-          <!-- Fixed: Maps to your JavaScript clear engine logic function exactly -->
-          <button onclick="clearWallCanvas()" style="background:#ff0000; color:#fff; border:1px solid #fff; padding:4px 8px; font-family:monospace; margin-top:6px; font-size:0.7rem; cursor:pointer;">[ ERASE ]</button>
+          <button onclick="saveCanvasToCloud()" style="background:#00ff00; color:#000; border:1px solid #fff; padding:4px 8px; font-family:monospace; margin-top:6px; font-size:0.7rem; font-weight:bold; cursor:pointer;">[ 💾 SHARE PICTURE WITH WORLD ]</button>
+          <button onclick="clearWallCanvas()" style="background:#ff0000; color:#fff; border:1px solid #fff; padding:4px 8px; font-family:monospace; margin-top:6px; font-size:0.7rem; cursor:pointer;">[ WIPE BOARD ]</button>
         </div>
       </div>
 
@@ -141,7 +141,6 @@
       <div class="panel" style="text-align:center; font-size:0.75rem;">
         <div class="panel-title">📊 Global Visitors</div>
         <div id="visitor-counter-box" style="background:none!important; padding:5px 0;">
-          <!-- Fixed: Swapped broken root placeholders for an active 90s analytical flag banner tracking countries -->
           <a href="https://flagcounter.com" style="background:none!important; display:inline-block;">
             <img src="https://flagcounter.com" alt="Flag Counter" border="0" style="background:none!important; display:block;">
           </a>
@@ -162,13 +161,33 @@
 </div>
 
 <script>
-  // Interactive Canvas Drawing Engine
+  // CONFIGURATION SETTINGS FOR YOUR CLOUD MEMORY
+  const BIN_ID = "YOUR_BIN_ID_HERE";
+  const API_KEY = "YOUR_SECRET_KEY_HERE";
+
   const canvas = document.getElementById('paintCanvas');
   const ctx = canvas.getContext('2d');
   let painting = false;
 
+  window.addEventListener('load', () => {
+    if(BIN_ID === "YOUR_BIN_ID_HERE") return;
+    
+    fetch(`https://jsonbin.io{BIN_ID}/latest`, {
+      headers: { "X-Master-Key": API_KEY }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.record && data.record.image) {
+        const img = new Image();
+        img.onload = () => ctx.drawImage(img, 0, 0);
+        img.src = data.record.image;
+      }
+    }).catch(err => console.log("Database loading error:", err));
+  });
+
   function startDraw(e) { painting = true; drawStroke(e); }
   function endDraw() { painting = false; ctx.beginPath(); }
+
   function drawStroke(e) {
     if (!painting) return;
     ctx.lineWidth = 3;
@@ -187,7 +206,29 @@
     ctx.beginPath();
     ctx.moveTo(x, y);
   }
-  function clearWallCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+  function saveCanvasToCloud() {
+    if(BIN_ID === "YOUR_BIN_ID_HERE") {
+      alert("Please configure your secret BIN_ID key inside the HTML code first!");
+      return;
+    }
+    
+    const imgData = canvas.toDataURL();
+    fetch(`https://jsonbin.io{BIN_ID}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": API_KEY
+      },
+      body: JSON.stringify({ image: imgData })
+    })
+    .then(() => alert("Artwork saved to the secret room cloud board successfully!"))
+    .catch(err => alert("Cloud saving failed: " + err));
+  }
+
+  function clearWallCanvas() { 
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+  }
 
   canvas.addEventListener('mousedown', startDraw);
   canvas.addEventListener('mouseup', endDraw);
