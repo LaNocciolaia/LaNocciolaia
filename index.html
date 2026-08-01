@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-Theme: matrix
-<style>
-  * {
-    background-image: url("shrimp.png") !important;
-    background-repeat: repeat !important;
-    background-size: 40px auto !important;
-  }
-</style>
-  html, body, #wrapper, .content, .matrix-bg {
-    background-image: url("shrimp.png") !important;
-    background-repeat: repeat !important;
-    background-color: transparent !important;
-    background-size: 40px auto !important;
-
-  }
-</style>
-
-</style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="create-geocities-app">
-  <title>{{SITE_NAME}} — Welcome!</title>
+  <title>My Secret Room — Welcome!</title>
   <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* This automatically forces your tiny tiled shrimp background onto everything on mobile phones */
+    * {
+      background-image: url("shrimp.png") !important;
+      background-repeat: repeat !important;
+      background-size: 40px auto !important;
+    }
+    /* Clears out default template backgrounds so the shrimp can show through */
+    html, body, #page-wrapper, #main-table, td, .panel, .under-construction {
+      background-color: transparent !important;
+      background-image: url("shrimp.png") !important;
+      background-repeat: repeat !important;
+      background-size: 40px auto !important;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Falling effect elements spawned by JS -->
 <!-- Matrix rain canvas -->
 <canvas id="matrix-canvas"></canvas>
 <div id="matrix-hint">[M] toggle matrix</div>
@@ -48,12 +44,12 @@ Theme: matrix
     <td colspan="2" id="header-cell">
       <div class="marquee-wrapper">
         <span class="marquee-inner">
-          ★ Welcome to {{SITE_NAME}} ★ &nbsp;&nbsp;&nbsp; Est. {{YEAR}} &nbsp;&nbsp;&nbsp;
-          ★ Made with ❤️ by {{AUTHOR_NAME}} ★ &nbsp;&nbsp;&nbsp;
+          ★ Welcome to My Secret Room ★ &nbsp;&nbsp;&nbsp; Est. 2026 &nbsp;&nbsp;&nbsp;
+          ★ Made with ❤️ by Me ★ &nbsp;&nbsp;&nbsp;
           This site is best viewed in Netscape Navigator 4.0 at 800×600 &nbsp;&nbsp;&nbsp;
         </span>
       </div>
-      <h1 class="rainbow" style="margin:8px 0 4px;">{{SITE_NAME}}</h1>
+      <h1 class="rainbow" style="margin:8px 0 4px;">My Secret Room</h1>
       <p style="font-size:0.8rem;opacity:0.8;">
         <span class="blink">★</span>
         Welcome to my corner of the web!
@@ -70,13 +66,14 @@ Theme: matrix
 
       <div class="panel">
         <div class="panel-title">📡 Navigation</div>
-        {{NAV_LINKS}}
+        <a href="index.html" style="display:block;color:#fff;margin:5px 0;">🏠 Home</a>
+        <a href="guestbook.html" style="display:block;color:#fff;margin:5px 0;">📖 Guestbook</a>
       </div>
 
       <div class="panel" style="text-align:center;">
         <div class="panel-title">🌐 Site Info</div>
         <span class="spinning-globe">🌍</span>
-        <div style="font-size:0.7rem;margin-top:4px;">Theme: {{THEME_NAME}}</div>
+        <div style="font-size:0.7rem;margin-top:4px;">Theme: matrix</div>
         <span id="page-clock">00:00:00</span>
       </div>
 
@@ -88,8 +85,10 @@ Theme: matrix
       <div class="panel" style="text-align:center;font-size:0.75rem;">
         <div class="panel-title">📊 Visitors</div>
         <div id="visitor-counter-box">
-          <div class="counter-label">You are visitor #</div>
-          <div class="counter-digits" id="counter-display"></div>
+          <!-- Real 90s Country and Visit Counter Widget Inserted Here -->
+          <a href="https://flagcounter.com" style="background:none!important;">
+            <img src="https://flagcounter.com" alt="Flag Counter" border="0" style="background:none!important;">
+          </a>
         </div>
       </div>
 
@@ -111,70 +110,42 @@ Theme: matrix
         <div class="panel-title">🏠 Welcome to My Homepage! <span class="new-badge">NEW</span></div>
 
         <p>
-          Hey there, internet traveler! 👋 You've found <strong>{{SITE_NAME}}</strong>,
-          the personal homepage of <strong>{{AUTHOR_NAME}}</strong>.
-          Pull up a chair, grab a Surge, and stay a while!
+          Hey there, internet traveler! 👋 You've found <strong>My Secret Room</strong>. 
+          You can only get in here if you know where the QR code is hidden! Pull up a chair and stay a while!
         </p>
 
         <div class="star-divider">✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦</div>
 
         <h2 class="neon-text">🔥 What's New</h2>
         <ul style="margin-left:16px;font-size:0.85rem;">
-          <li><span class="new-badge">NEW</span> <strong>{{YEAR}}</strong> — Site launched! Welcome!</li>
-          <li>🖼️ Gallery page now live — check it out!</li>
-          <li>📖 Guestbook open — please sign it!</li>
-          <li>🔗 Cool Links page updated with fresh finds.</li>
+          <li><span class="new-badge">NEW</span> <strong>2026</strong> — Room launched via QR code!</li>
+          <li>🖼️ Shrimp wallpaper has been applied successfully!</li>
+          <li>📟 Real-time visitor country tracker added to the sidebar.</li>
         </ul>
 
         <hr class="retro-divider">
 
-        <h2 class="neon-text">👤 About This Site</h2>
+        <h2 class="neon-text">👤 About This Room</h2>
         <p>
-          This is the personal website of <strong>{{AUTHOR_NAME}}</strong>.
-          Here you'll find my thoughts, photos, cool links, and more.
-          I built this page all by myself — no frames were harmed in the making!
-        </p>
-        <p>
-          Feel free to look around. Don't forget to
-          <a href="guestbook.html">sign my guestbook</a>!
+          I built this private digital space entirely out of retro vibes. Feel free to look around!
         </p>
       </div>
 
-      <!-- Under Construction -->
+      <!-- Under Construction Banner -->
       <div class="under-construction">
         <div class="uc-inner">
           <span class="uc-icon">🚧</span>
-          THIS PAGE IS UNDER CONSTRUCTION
+          THIS ROOM IS UNDER CONSTRUCTION
           <span class="uc-icon">🚧</span>
-          <br>
-          <span style="font-size:0.75rem;font-weight:normal;">
-            Check back soon for more awesome content!
-          </span>
         </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-title">💡 Did You Know?</div>
-        <p style="font-size:0.85rem;">
-          You can press <strong style="color:var(--heading);">[M]</strong> on your keyboard
-          to activate the secret Matrix rain effect! 🕶️
-        </p>
-        <p style="font-size:0.85rem;">
-          This site uses <strong>ZERO external dependencies</strong>.
-          Pure HTML, CSS, and vanilla JavaScript — just like 1996! 🖥️
-        </p>
       </div>
 
       <div class="panel">
         <div class="panel-title">📬 Contact Me</div>
         <p style="font-size:0.85rem;">
-          Want to reach me? Send me an email!
+          Want to reach me? 
           <br><br>
-          <a href="mailto:{{AUTHOR_NAME}}@example.com" class="retro-btn">
-            📧 Email Me!
-          </a>
-          &nbsp;
-          <a href="guestbook.html" class="retro-btn">📖 Sign Guestbook</a>
+          <a href="guestbook.html" class="retro-btn">📖 Sign My Guestbook</a>
         </p>
       </div>
 
@@ -186,26 +157,33 @@ Theme: matrix
     <td colspan="2" id="footer-cell">
       <div class="star-divider">✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦</div>
       <p style="font-size:0.75rem;margin:4px 0;">
-        © {{YEAR}} <strong>{{AUTHOR_NAME}}</strong> — All Rights Reserved
-        &nbsp;|&nbsp;
-        <a href="index.html">Home</a>
-        &nbsp;|&nbsp;
-        <a href="guestbook.html">Guestbook</a>
+        © 2026 <strong>Me</strong> — All Rights Reserved
       </p>
       <p style="font-size:0.7rem;margin:4px 0;">
-        <span class="netscape-badge">Best viewed in Netscape Navigator 4.0<br>at 800×600 resolution</span>
-      </p>
-      <p style="font-size:0.65rem;opacity:0.6;margin-top:6px;">
-        Made with create-geocities-app &nbsp;✨&nbsp; No cookies. No tracking. Just vibes.
-      </p>
-      <p style="font-size:0.65rem;opacity:0.6;margin-top:6px;">
-        <a href="https://bestsugardaddyapps.com/">Best Sugar Daddy Apps</a>
+        <span class="netscape-badge">Best viewed on Mobile Phones via QR Code scan</span>
       </p>
     </td>
   </tr>
 
 </table>
 </div>
+
+<!-- Embedded background music track link -->
+<audio id="bg-music" loop src="https://scummbar.com"></audio>
+
+<script>
+  // Simple handler to ensure the built-in template button triggers our music file seamlessly
+  document.getElementById('music-btn').addEventListener('click', function() {
+    var audio = document.getElementById('bg-music');
+    if (audio.paused) {
+      audio.play();
+      this.innerText = "⏸ PAUSE MUSIC";
+    } else {
+      audio.pause();
+      this.innerText = "🎵 PLAY MUSIC";
+    }
+  });
+</script>
 
 <script src="js/main.js"></script>
 </body>
